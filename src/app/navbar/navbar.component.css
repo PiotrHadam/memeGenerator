@@ -1,0 +1,36 @@
+header{
+    margin-top: -50px;
+    height: 20%;
+    text-align: center;
+    padding: 20px;
+    background-color: #F7F6FB;
+}
+
+.brand {
+    font-family: 'Comic Neue', cursive;
+    font-size: 55px;
+    color: #300EDA;
+}
+
+.navbar {
+    font-family: 'Comic Neue', cursive;
+    margin-top: auto;
+}
+
+.navbar-nav a {
+    color: #300EDA;
+    font-size: 20px;
+}
+
+.navbar-nav a:hover {
+    color: #DD97D9;
+}
+
+.navbar-nav a.active {
+    color: #E92130;
+}
+
+.navbar-brand {
+    margin-left: 1rem;
+    padding: .5rem;
+}
