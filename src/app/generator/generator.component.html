@@ -24,8 +24,8 @@
                                 <label for="">Wielkość czcionki</label>
                                 <select class="form-select" #fontSize (change)="changeFontSize($event)">
                                     <option class="dropdown-item" disabled selected value="undefined">Wybierz rozmiar czcionki</option>
-                                    <option *ngFor="let fsize of fsizes" [value]="fsize.value">
-                                        {{fsize.display}}
+                                    <option *ngFor="let fontSize of fontSizes" [value]="fontSize.value">
+                                        {{fontSize.display}}
                                     </option>
                                 </select>
                             </div>
@@ -64,8 +64,8 @@
                                     <div class="form-group">
                                         <label for="">Grubość linii</label>
                                         <select class="form-select" #lineSize (change)="changeLineSize($event)">
-                                            <option *ngFor="let size of sizes" [value]="size">
-                                                {{size}}
+                                            <option *ngFor="let lineSize of lineSizes" [value]="lineSize">
+                                                {{lineSize}}
                                             </option>
                                         </select>
                                     </div>

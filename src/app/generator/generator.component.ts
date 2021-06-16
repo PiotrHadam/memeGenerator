@@ -7,17 +7,16 @@ import { ColorEvent } from 'ngx-color';
   styleUrls: ['./generator.component.css']
 })
 export class GeneratorComponent implements AfterViewInit{
+  
+  @ViewChild('memeCanvas', { static: false }) myCanvas: any;
 
-  sizes = [
-    "2",
-    "4",
-    "6",
-    "8",
-    "10"
-  ]
-  selectedSize: string = "2"
-
-  fsizes: Font[] = [
+  topText: string = '';
+  bottomText: string = '';
+  textSize: string = '50px';
+  fileEvent: any;
+  textColor: string = '#000000';
+  bgColor: string = '#F9F9FB';
+  fontSizes: Font[] = [
     {display: "20", value: "20px Comic Sans MS"},
     {display: "25", value: "25px Comic Sans MS"},
     {display: "30", value: "30px Comic Sans MS"},
@@ -28,17 +27,7 @@ export class GeneratorComponent implements AfterViewInit{
     {display: "55", value: "55px Comic Sans MS"},
     {display: "60", value: "60px Comic Sans MS"},
   ];
-
-  selectedFSize: string = {display: "45", value: "45px Comic Sans MS"}.value;
-  
-  @ViewChild('memeCanvas', { static: false }) myCanvas: any;
-
-  topText: string = '';
-  bottomText: string = '';
-  textSize: string = '50px';
-  fileEvent: any;
-  textColor: string = '#000000';
-  bgColor: string = '#F9F9FB';
+  selectedFontSize: string = {display: "45", value: "45px Comic Sans MS"}.value;
 
   // rysowanie
   canvasWidth: number = 700;
@@ -57,6 +46,14 @@ export class GeneratorComponent implements AfterViewInit{
   brushDownPos = new Array();
   strokeColor: string = 'black';
   fillColor: string = 'black';
+  lineSizes = [
+    "2",
+    "4",
+    "6",
+    "8",
+    "10"
+  ]
+  selectedLineSize: string = "2"
 
   constructor() {
   }
@@ -111,7 +108,7 @@ export class GeneratorComponent implements AfterViewInit{
 
     //pisanie
     ctx.fillStyle = this.textColor;
-    ctx.font = this.selectedFSize;
+    ctx.font = this.selectedFontSize;
     
     ctx.textAlign = 'center';
     ctx.fillText(this.topText, canvas.width/2, 75);
@@ -126,7 +123,7 @@ export class GeneratorComponent implements AfterViewInit{
 
   //zmiana wielkości czcionki
   changeFontSize($event:any){
-    this.selectedFSize = $event.target.value;    
+    this.selectedFontSize = $event.target.value;    
     this.drawText();
   }
 
@@ -143,7 +140,7 @@ export class GeneratorComponent implements AfterViewInit{
     this.ctxD = this.canvasD.getContext('2d');
     
     this.ctxD.strokeStyle = this.strokeColor;
-    this.ctxD.lineWidth = this.selectedSize;
+    this.ctxD.lineWidth = this.selectedLineSize;
   }
 
   //pobranie pozycji myszy
@@ -171,7 +168,7 @@ export class GeneratorComponent implements AfterViewInit{
 
   //zmiana grubości linii
   changeLineSize($event:any){
-    this.selectedSize = $event.target.value;
+    this.selectedLineSize = $event.target.value;
   }
 
   //aktualizacja rozmiaru kształtu rysowanego (linii, koła, prostokąta, elipsy)
@@ -196,7 +193,7 @@ export class GeneratorComponent implements AfterViewInit{
   drawRubberbandShape(loc:any){
     this.ctxD.strokeStyle = this.strokeColor;
     this.ctxD.fillStyle = this.fillColor;
-    this.ctxD.lineWidth = this.selectedSize;
+    this.ctxD.lineWidth = this.selectedLineSize;
     
     if(this.currentTool === "brush"){
         this.DrawBrush();
@@ -343,15 +340,6 @@ class MouseDownPos{
       this.y = y;
   }
 }
-
-// class Font{
-//   display: string;
-//   value: string;
-//   constructor(display:any, value:any){
-//     this.display = display;
-//     this.value = value;
-//   }
-// }
 
 interface Font{
   display: string;
