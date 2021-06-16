@@ -38,14 +38,28 @@
 
                             <!-- Rysowanie -->
                             <br>
-                            <div class="form-group">
-                                <label for="">Narzędzia Rysowania</label><br>
-                                <div class="toolbar btn-group" role="group">
-                                    <button id="brush" type="button" class="btn btn-secondary" (click)="changeTool('brush')"><mat-icon>create</mat-icon></button>
-                                    <button id="line" type="button" class="btn btn-secondary" (click)="changeTool('line')"><mat-icon>horizontal_rule</mat-icon></button>
-                                    <button id="rectangle" type="button" class="btn btn-secondary" (click)="changeTool('rectangle')"><mat-icon>crop_5_4</mat-icon></button>
-                                    <button id="circle" type="button" class="btn btn-secondary" (click)="changeTool('circle')"><mat-icon class="material-icons-outlined">circle</mat-icon></button>
-                                    <button id="ellipse" type="button" class="btn btn-secondary" (click)="changeTool('ellipse')" style="font-size: 21px;">&#11053;</button>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="">Narzędzia Rysowania</label><br>
+                                        <div class="toolbar btn-group" role="group">
+                                            <button id="brush" type="button" class="btn btn-secondary" (click)="changeTool('brush')"><mat-icon>create</mat-icon></button>
+                                            <button id="line" type="button" class="btn btn-secondary" (click)="changeTool('line')"><mat-icon>horizontal_rule</mat-icon></button>
+                                            <button id="rectangle" type="button" class="btn btn-secondary" (click)="changeTool('rectangle')"><mat-icon>crop_5_4</mat-icon></button>
+                                            <button id="circle" type="button" class="btn btn-secondary" (click)="changeTool('circle')"><mat-icon class="material-icons-outlined">circle</mat-icon></button>
+                                            <button id="ellipse" type="button" class="btn btn-secondary" (click)="changeTool('ellipse')" style="font-size: 21px;">&#11053;</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="">Grubość linii</label>
+                                        <select class="form-select" #lineSize (change)="changeLineSize($event)">
+                                            <option *ngFor="let size of sizes" [value]="size">
+                                                {{size}}
+                                            </option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                             <br>
@@ -54,6 +68,7 @@
                                 <label for="">Kolor Rysowania</label>
                                 <color-chrome (onChangeComplete)='canvasDrawingColor($event)'></color-chrome>
                             </div>
+                            
 
                             <!-- Zapisz -->
                             <button class="btn btn-outline-primary w-100 mt-5" (click)='downloadImg()'>Pobierz</button>

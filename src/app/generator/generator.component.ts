@@ -7,6 +7,15 @@ import { ColorEvent } from 'ngx-color';
   styleUrls: ['./generator.component.css']
 })
 export class GeneratorComponent implements AfterViewInit{
+
+  sizes = [
+    "2",
+    "4",
+    "6",
+    "8",
+    "10"
+  ]
+  selectedSize: string = "2"
   
   @ViewChild('memeCanvas', { static: false }) myCanvas: any;
 
@@ -115,7 +124,7 @@ export class GeneratorComponent implements AfterViewInit{
     this.ctxD = this.canvasD.getContext('2d');
     
     this.ctxD.strokeStyle = this.strokeColor;
-    this.ctxD.lineWidth = 2;
+    this.ctxD.lineWidth = this.selectedSize;
   }
 
   //pobranie pozycji myszy
@@ -142,6 +151,11 @@ export class GeneratorComponent implements AfterViewInit{
     this.strokeColor = $event.color.hex;
     this.drawText();
     this.RedrawCanvasImage();
+  }
+
+  //zmiana grubości linii
+  changeLineSize($event:any){
+    this.selectedSize = $event.target.value;
   }
 
   //aktualizacja rozmiaru kształtu rysowanego (linii, koła, prostokąta, elipsy)
@@ -222,6 +236,7 @@ export class GeneratorComponent implements AfterViewInit{
 
   //reakcja na kliknięcie myszą
   ReactToMouseDown(e:MouseEvent){
+    this.ctxD.lineWidth = this.selectedSize;
     this.canvasD.style.cursor = "crosshair";
     this.loc = this.GetMousePosition(e.clientX, e.clientY);
     this.SaveCanvasImage();

@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatIconModule } from "@angular/material/icon";
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +24,7 @@ import { MatIconModule } from "@angular/material/icon";
     AppRoutingModule,
     ColorChromeModule,
     FontAwesomeModule,
-    MatIconModule
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
