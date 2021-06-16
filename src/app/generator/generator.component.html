@@ -20,15 +20,31 @@
                                 <label for="">Dolny Tekst</label>
                                 <input type="text" class="form-control" name="bottomText" [(ngModel)]='bottomText' (keyup)='drawText()'>
                             </div>
-                            <div class="form-group">
-                                <label for="">Wielkość czcionki</label>
-                                <select class="form-select" #fontSize (change)="changeFontSize($event)">
-                                    <option class="dropdown-item" disabled selected value="undefined">Wybierz rozmiar czcionki</option>
-                                    <option *ngFor="let fontSize of fontSizes" [value]="fontSize.value">
-                                        {{fontSize.display}}
-                                    </option>
-                                </select>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="">Wielkość czcionki</label>
+                                        <select class="form-select" #fontSize (change)="changeFontSize($event)">
+                                            <option class="dropdown-item" disabled selected value="undefined">Wybierz rozmiar czcionki</option>
+                                            <option *ngFor="let fontSize of fontSizes" [value]="fontSize.value">
+                                                {{fontSize.display}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="">Czcionka</label>
+                                        <select class="form-select" #font (change)="changeFont($event)">
+                                            <option class="dropdown-item" disabled selected value="undefined">Wybierz czcionkę</option>
+                                            <option *ngFor="let font of fonts" [value]="font">
+                                                {{font}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
+
 
                             <div class="row">
                                 <div class="col-md-6">

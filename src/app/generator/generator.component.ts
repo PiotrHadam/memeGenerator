@@ -17,17 +17,26 @@ export class GeneratorComponent implements AfterViewInit{
   textColor: string = '#000000';
   bgColor: string = '#F9F9FB';
   fontSizes: Font[] = [
-    {display: "20", value: "20px Comic Sans MS"},
-    {display: "25", value: "25px Comic Sans MS"},
-    {display: "30", value: "30px Comic Sans MS"},
-    {display: "35", value: "35px Comic Sans MS"},
-    {display: "40", value: "40px Comic Sans MS"},
-    {display: "45", value: "45px Comic Sans MS"},
-    {display: "50", value: "50px Comic Sans MS"},
-    {display: "55", value: "55px Comic Sans MS"},
-    {display: "60", value: "60px Comic Sans MS"},
+    {display: "20", value: "20px "},
+    {display: "25", value: "25px "},
+    {display: "30", value: "30px "},
+    {display: "35", value: "35px "},
+    {display: "40", value: "40px "},
+    {display: "45", value: "45px "},
+    {display: "50", value: "50px "},
+    {display: "55", value: "55px "},
+    {display: "60", value: "60px "},
   ];
   selectedFontSize: string = {display: "45", value: "45px Comic Sans MS"}.value;
+  fonts: string[] = [
+    "Comic Sans MS",
+    "Courier New",
+    "Gill Sans",
+    "Lucida Sans",
+    "Times New Roman"
+  ];
+  selectedFont: string = "Comic Sans MS";
+  font: string = "45px Comic Sans MS";
 
   // rysowanie
   canvasWidth: number = 700;
@@ -83,10 +92,14 @@ export class GeneratorComponent implements AfterViewInit{
           height = (height * 600) / width;
           width = 600; 
         }
-        else{
-          width = (width * 700) / height;
+        else if (width < height){
+          width = (width * 600) / height;
           height = 600;      
-        }        
+        }
+        else{
+          width = 600;
+          height = 600;
+        }
         ctx.drawImage(img, ((canvas.width - width)/2), ((canvas.height - height)/2), width, height);        
       }
     }
@@ -108,7 +121,7 @@ export class GeneratorComponent implements AfterViewInit{
 
     //pisanie
     ctx.fillStyle = this.textColor;
-    ctx.font = this.selectedFontSize;
+    ctx.font = this.font;
     
     ctx.textAlign = 'center';
     ctx.fillText(this.topText, canvas.width/2, 75);
@@ -123,7 +136,15 @@ export class GeneratorComponent implements AfterViewInit{
 
   //zmiana wielkości czcionki
   changeFontSize($event:any){
-    this.selectedFontSize = $event.target.value;    
+    this.selectedFontSize = $event.target.value;
+    this.font = this.selectedFontSize + this.selectedFont;
+    this.drawText();
+  }
+
+  //zmiana czcionki
+  changeFont($event:any){
+    this.selectedFont = $event.target.value;   
+    this.font = this.selectedFontSize + this.selectedFont; 
     this.drawText();
   }
 
