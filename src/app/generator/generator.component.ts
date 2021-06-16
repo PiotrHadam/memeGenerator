@@ -16,6 +16,20 @@ export class GeneratorComponent implements AfterViewInit{
     "10"
   ]
   selectedSize: string = "2"
+
+  fsizes: Font[] = [
+    {display: "20", value: "20px Comic Sans MS"},
+    {display: "25", value: "25px Comic Sans MS"},
+    {display: "30", value: "30px Comic Sans MS"},
+    {display: "35", value: "35px Comic Sans MS"},
+    {display: "40", value: "40px Comic Sans MS"},
+    {display: "45", value: "45px Comic Sans MS"},
+    {display: "50", value: "50px Comic Sans MS"},
+    {display: "55", value: "55px Comic Sans MS"},
+    {display: "60", value: "60px Comic Sans MS"},
+  ];
+
+  selectedFSize: string = {display: "45", value: "45px Comic Sans MS"}.value;
   
   @ViewChild('memeCanvas', { static: false }) myCanvas: any;
 
@@ -77,7 +91,6 @@ export class GeneratorComponent implements AfterViewInit{
           height = 600;      
         }        
         ctx.drawImage(img, ((canvas.width - width)/2), ((canvas.height - height)/2), width, height);        
-        //ctx.drawImage(img, 50, 150, 600, 500);
       }
     }
   }
@@ -98,7 +111,7 @@ export class GeneratorComponent implements AfterViewInit{
 
     //pisanie
     ctx.fillStyle = this.textColor;
-    ctx.font = '50px Comic Sans MS';
+    ctx.font = this.selectedFSize;
     
     ctx.textAlign = 'center';
     ctx.fillText(this.topText, canvas.width/2, 75);
@@ -108,6 +121,12 @@ export class GeneratorComponent implements AfterViewInit{
   //zmiana koloru tekstu - odświeżenie obrazu
   canvasTextColor($event: ColorEvent){
     this.textColor = $event.color.hex;
+    this.drawText();
+  }
+
+  //zmiana wielkości czcionki
+  changeFontSize($event:any){
+    this.selectedFSize = $event.target.value;    
     this.drawText();
   }
 
@@ -147,10 +166,7 @@ export class GeneratorComponent implements AfterViewInit{
 
   //zmiana koloru rysowania
   canvasDrawingColor($event: ColorEvent){
-    this.SaveCanvasImage();
     this.strokeColor = $event.color.hex;
-    this.drawText();
-    this.RedrawCanvasImage();
   }
 
   //zmiana grubości linii
@@ -180,6 +196,7 @@ export class GeneratorComponent implements AfterViewInit{
   drawRubberbandShape(loc:any){
     this.ctxD.strokeStyle = this.strokeColor;
     this.ctxD.fillStyle = this.fillColor;
+    this.ctxD.lineWidth = this.selectedSize;
     
     if(this.currentTool === "brush"){
         this.DrawBrush();
@@ -236,7 +253,6 @@ export class GeneratorComponent implements AfterViewInit{
 
   //reakcja na kliknięcie myszą
   ReactToMouseDown(e:MouseEvent){
-    this.ctxD.lineWidth = this.selectedSize;
     this.canvasD.style.cursor = "crosshair";
     this.loc = this.GetMousePosition(e.clientX, e.clientY);
     this.SaveCanvasImage();
@@ -326,4 +342,18 @@ class MouseDownPos{
       this.x = x,
       this.y = y;
   }
+}
+
+// class Font{
+//   display: string;
+//   value: string;
+//   constructor(display:any, value:any){
+//     this.display = display;
+//     this.value = value;
+//   }
+// }
+
+interface Font{
+  display: string;
+  value: string;
 }

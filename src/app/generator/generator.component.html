@@ -20,6 +20,15 @@
                                 <label for="">Dolny Tekst</label>
                                 <input type="text" class="form-control" name="bottomText" [(ngModel)]='bottomText' (keyup)='drawText()'>
                             </div>
+                            <div class="form-group">
+                                <label for="">Wielkość czcionki</label>
+                                <select class="form-select" #fontSize (change)="changeFontSize($event)">
+                                    <option class="dropdown-item" disabled selected value="undefined">Wybierz rozmiar czcionki</option>
+                                    <option *ngFor="let fsize of fsizes" [value]="fsize.value">
+                                        {{fsize.display}}
+                                    </option>
+                                </select>
+                            </div>
 
                             <div class="row">
                                 <div class="col-md-6">
@@ -68,7 +77,6 @@
                                 <label for="">Kolor Rysowania</label>
                                 <color-chrome (onChangeComplete)='canvasDrawingColor($event)'></color-chrome>
                             </div>
-                            
 
                             <!-- Zapisz -->
                             <button class="btn btn-outline-primary w-100 mt-5" (click)='downloadImg()'>Pobierz</button>
