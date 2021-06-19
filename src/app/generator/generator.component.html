@@ -9,22 +9,22 @@
                         <form>
                             <div class="form-group">
                                 <label for="">Wybierz obraz</label>
-                                <input type="file" class="form-control" accept="image/*" (change)='preview($event)'>
+                                <input type="file" class="form-control" accept="image/*" (change)='Preview($event)'>
                             </div>
 
                             <div class="form-group">
                                 <label for="">Górny Tekst</label>
-                                <input type="text" class="form-control" name="topText" [(ngModel)]='topText' (keyup)='drawText()'>
+                                <input type="text" class="form-control" name="topText" [(ngModel)]='topText' (keyup)='DrawText()'>
                             </div>
                             <div class="form-group">
                                 <label for="">Dolny Tekst</label>
-                                <input type="text" class="form-control" name="bottomText" [(ngModel)]='bottomText' (keyup)='drawText()'>
+                                <input type="text" class="form-control" name="bottomText" [(ngModel)]='bottomText' (keyup)='DrawText()'>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="">Wielkość czcionki</label>
-                                        <select class="form-select" #fontSize (change)="changeFontSize($event)">
+                                        <select class="form-select" #fontSize (change)="ChangeFontSize($event)">
                                             <option class="dropdown-item" disabled selected value="undefined">Wybierz rozmiar czcionki</option>
                                             <option *ngFor="let fontSize of fontSizes" [value]="fontSize.value">
                                                 {{fontSize.display}}
@@ -35,7 +35,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="">Czcionka</label>
-                                        <select class="form-select" #font (change)="changeFont($event)">
+                                        <select class="form-select" #font (change)="ChangeFont($event)">
                                             <option class="dropdown-item" disabled selected value="undefined">Wybierz czcionkę</option>
                                             <option *ngFor="let font of fonts" [value]="font">
                                                 {{font}}
@@ -50,13 +50,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="">Kolor Tekstu</label>
-                                        <color-chrome (onChangeComplete)='canvasTextColor($event)'></color-chrome>
+                                        <color-chrome (onChangeComplete)='CanvasTextColor($event)'></color-chrome>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="">Kolor Tła</label>
-                                        <color-chrome (onChangeComplete)='canvasBgColor($event)'></color-chrome>
+                                        <color-chrome (onChangeComplete)='CanvasBgColor($event)'></color-chrome>
                                     </div>
                                 </div>
                             </div>
@@ -68,18 +68,18 @@
                                     <div class="form-group">
                                         <label for="">Narzędzia Rysowania</label><br>
                                         <div class="toolbar btn-group" role="group">
-                                            <button id="brush" type="button" class="btn btn-secondary" (click)="changeTool('brush')"><mat-icon>create</mat-icon></button>
-                                            <button id="line" type="button" class="btn btn-secondary" (click)="changeTool('line')"><mat-icon>horizontal_rule</mat-icon></button>
-                                            <button id="rectangle" type="button" class="btn btn-secondary" (click)="changeTool('rectangle')"><mat-icon>crop_5_4</mat-icon></button>
-                                            <button id="circle" type="button" class="btn btn-secondary" (click)="changeTool('circle')"><mat-icon class="material-icons-outlined">circle</mat-icon></button>
-                                            <button id="ellipse" type="button" class="btn btn-secondary" (click)="changeTool('ellipse')" style="font-size: 21px;">&#11053;</button>
+                                            <button id="brush" type="button" class="btn btn-secondary" (click)="ChangeTool('brush')"><mat-icon>create</mat-icon></button>
+                                            <button id="line" type="button" class="btn btn-secondary" (click)="ChangeTool('line')"><mat-icon>horizontal_rule</mat-icon></button>
+                                            <button id="rectangle" type="button" class="btn btn-secondary" (click)="ChangeTool('rectangle')"><mat-icon>crop_5_4</mat-icon></button>
+                                            <button id="circle" type="button" class="btn btn-secondary" (click)="ChangeTool('circle')"><mat-icon class="material-icons-outlined">circle</mat-icon></button>
+                                            <button id="ellipse" type="button" class="btn btn-secondary" (click)="ChangeTool('ellipse')" style="font-size: 21px;">&#11053;</button>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="">Grubość linii</label>
-                                        <select class="form-select" #lineSize (change)="changeLineSize($event)">
+                                        <select class="form-select" #lineSize (change)="ChangeLineSize($event)">
                                             <option *ngFor="let lineSize of lineSizes" [value]="lineSize">
                                                 {{lineSize}}
                                             </option>
@@ -91,11 +91,11 @@
 
                             <div class="form-group">
                                 <label for="">Kolor Rysowania</label>
-                                <color-chrome (onChangeComplete)='canvasDrawingColor($event)'></color-chrome>
+                                <color-chrome (onChangeComplete)='CanvasDrawingColor($event)'></color-chrome>
                             </div>
 
                             <!-- Zapisz -->
-                            <button class="btn btn-outline-primary w-100 mt-5" (click)='downloadImg()'>Pobierz</button>
+                            <button class="btn btn-outline-primary w-100 mt-5" (click)='DownloadImg()'>Pobierz</button>
 
                         </form>
                     </div>

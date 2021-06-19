@@ -68,11 +68,11 @@ export class GeneratorComponent implements AfterViewInit{
   }
 
   ngAfterViewInit(): void {
-    this.setupCanvas();
+    this.SetupCanvas();
   }
 
   //rysowanie pobranego obrazu na canvas
-  preview(e:any){
+  Preview(e:any){
     this.fileEvent = e;
 
     let canvas = this.myCanvas.nativeElement;
@@ -106,7 +106,7 @@ export class GeneratorComponent implements AfterViewInit{
   }
 
   //pisanie tekstu
-  drawText(){
+  DrawText(){
     let canvas = this.myCanvas.nativeElement;
     let ctx = canvas.getContext('2d');
     
@@ -116,7 +116,7 @@ export class GeneratorComponent implements AfterViewInit{
     ctx.fillRect(0, 0, canvas.width, canvas.height); //wypełnienie canvasa
     
     try {
-      this.preview(this.fileEvent); //wczytanie obrazu od nowa
+      this.Preview(this.fileEvent); //wczytanie obrazu od nowa
     } catch (error) { }
 
     //pisanie
@@ -129,34 +129,34 @@ export class GeneratorComponent implements AfterViewInit{
   }
 
   //zmiana koloru tekstu - odświeżenie obrazu
-  canvasTextColor($event: ColorEvent){
+  CanvasTextColor($event: ColorEvent){
     this.textColor = $event.color.hex;
-    this.drawText();
+    this.DrawText();
   }
 
   //zmiana wielkości czcionki
-  changeFontSize($event:any){
+  ChangeFontSize($event:any){
     this.selectedFontSize = $event.target.value;
     this.font = this.selectedFontSize + this.selectedFont;
-    this.drawText();
+    this.DrawText();
   }
 
   //zmiana czcionki
-  changeFont($event:any){
+  ChangeFont($event:any){
     this.selectedFont = $event.target.value;   
     this.font = this.selectedFontSize + this.selectedFont; 
-    this.drawText();
+    this.DrawText();
   }
 
   //zmiana koloru tła - odświeżenie obrazu
-  canvasBgColor($event: ColorEvent){
+  CanvasBgColor($event: ColorEvent){
     this.bgColor = $event.color.hex;
-    this.drawText();
+    this.DrawText();
   }
 
   //RYSOWANIE
   //ustawienie canvasa
-  setupCanvas(){
+  SetupCanvas(){
     this.canvasD = this.myCanvas.nativeElement;
     this.ctxD = this.canvasD.getContext('2d');
     
@@ -183,12 +183,12 @@ export class GeneratorComponent implements AfterViewInit{
   }
 
   //zmiana koloru rysowania
-  canvasDrawingColor($event: ColorEvent){
+  CanvasDrawingColor($event: ColorEvent){
     this.strokeColor = $event.color.hex;
   }
 
   //zmiana grubości linii
-  changeLineSize($event:any){
+  ChangeLineSize($event:any){
     this.selectedLineSize = $event.target.value;
   }
 
@@ -211,7 +211,7 @@ export class GeneratorComponent implements AfterViewInit{
   }
 
   //rysowanie kształtu
-  drawRubberbandShape(loc:any){
+  DrawRubberbandShape(loc:any){
     this.ctxD.strokeStyle = this.strokeColor;
     this.ctxD.fillStyle = this.fillColor;
     this.ctxD.lineWidth = this.selectedLineSize;
@@ -243,7 +243,7 @@ export class GeneratorComponent implements AfterViewInit{
   UpdateRubberbandOnMove(loc:any){
     this.UpdateRubberbandSizeData(loc);
  
-    this.drawRubberbandShape(loc);
+    this.DrawRubberbandShape(loc);
   }
 
   //dodanie punktu rysowania
@@ -311,15 +311,18 @@ export class GeneratorComponent implements AfterViewInit{
     this.UpdateRubberbandOnMove(this.loc);
     this.dragging = false;
     this.usingBrush = false;
+    this.brushYPoints = [];
+    this.brushXPoints = [];
+    this.brushDownPos = [];
   }
 
   //zmiana narzędzia do rysowania
-  changeTool(toolClicked:any){
+  ChangeTool(toolClicked:any){
     this.currentTool = toolClicked;
   }
 
   //pobranie gotowego obrazu
-  downloadImg(){
+  DownloadImg(){
     let canvas = this.myCanvas.nativeElement;
 
     let image = canvas.toDataURL('image/png');
